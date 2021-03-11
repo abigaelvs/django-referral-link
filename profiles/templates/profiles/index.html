@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+    home
+{% endblock title %}
+    
+
+{% block content %}
+    
+    {% if request.user.is_authenticated %}
+        {{request.user}}
+        {% if my_recs %}
+            <h1>My Recommendations</h1>
+            <ul>
+            
+            {% for my_rec in my_recs %}
+                <li>{{ my_rec.user }}</li>
+            {% endfor %}
+                
+            </ul>
+        {% else %}
+            <h1>You didn't recommend anyone yet</h1>
+    {% endif %}
+    {% else %}
+        <a href="{% url 'profiles:signup' %}">
+            <button class="btn btn-primary">Create an account</button>
+        </a>
+    {% endif %}
+        
+{% endblock content %}
+    
